@@ -3,210 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chetan Kumar | DevOps Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Chetan Kumar - DevOps Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #000000;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 2rem 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding-top: 120px;
+        }
+
+        .profile-container {
+            flex-shrink: 0;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 4px solid #000000;
+            object-fit: cover;
+        }
+
+        .home-content {
+            flex: 1;
+        }
+
+        .home-content h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            border: none;
+        }
+
+        .home-content .title {
+            font-size: 1.5rem;
+            color: #333333;
+            margin-bottom: 1.5rem;
+        }
+
+        .home-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #444444;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .linkedin-btn {
+            background: linear-gradient(135deg, #0077B5 0%, #005885 100%);
+        }
+
+        .github-btn {
+            background: linear-gradient(135deg, #333333 0%, #000000 100%);
+        }
+
+        /* Resume Section */
+        #resume {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #000000;
+        }
+
+        .resume-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.3rem;
+            border: none;
+            font-weight: bold;
+        }
+
+        .resume-title {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-contact {
+            font-size: 1rem;
+            color: #333333;
+        }
+
+        /* Resume Sections */
+        .resume-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-section-header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .resume-section-header:hover {
+            background-color: #333333;
+        }
+
+        .resume-section-header h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .resume-section-header.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .resume-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f9f9f9;
+        }
+
+        .resume-content.active {
+            max-height: 3000px;
+            transition: max-height 0.6s ease-in;
+        }
+
+        .resume-body {
+            padding: 1.5rem;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 1rem;
+            border: 1px solid #dddddd;
+            background-color: #ffffff;
+        }
+
+        .experience-header {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            background-color: #f5f5f5;
+            border-left: 4px solid #000000;
+            transition: background-color 0.3s;
+        }
+
+        .experience-header:hover {
+            background-color: #eeeeee;
+        }
+
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .experience-company {
+            color: #555555;
+            font-size: 1rem;
+        }
+
+        .experience-date {
+            color: #777777;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-top: 0.2rem;
+        }
+
+        .experience-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .experience-details.active {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .experience-details ul {
+            padding: 1rem 1rem 1rem 2.5rem;
+            margin: 0;
+        }
+
+        .experience-details li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Projects, Education, Skills */
+        .resume-body p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .resume-body strong {
+            font-weight: bold;
+        }
+
+        .resume-body ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-body li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            padding: 1rem;
+            background-color: #ffffff;
+            border-left: 4px solid #000000;
+            border: 1px solid #dddddd;
+        }
+
+        .skill-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .skill-item p {
+            margin: 0;
+            color: #555555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav .container {
+                padding: 0 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                padding: 1rem 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            #home {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .home-content h2 {
+                font-size: 2rem;
+            }
+
+            .home-content .title {
+                font-size: 1.2rem;
+            }
+
+            .social-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            section {
+                padding: 80px 1rem 40px;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-buttons {
+                flex-direction: column;
+            }
+
+            .social-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
+    <!-- Navigation -->
     <nav>
-        <div class="logo">Chetan Kumar</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#cv">Resume</a></li>
-            <li><a href="mailto:chetan.kumar90@outlook.com" class="contact-btn">Contact</a></li>
-        </ul>
+        <div class="container">
+            <h1>Chetan Kumar</h1>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#resume" onclick="closeMenu()">Resume</a></li>
+                <li><a href="mailto:chetan.kumar90@outlook.com">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Chetan Kumar</h1>
-            <h2>DevOps Engineer</h2>
-            <p>Building and operating Kubernetes-based platforms, CI/CD automation, and centralized logging in cloud environments.</p>
+    <!-- Home Section -->
+    <section id="home">
+        <div class="profile-container">
+            <img src="profile.png" alt="Chetan Kumar" class="profile-image">
+        </div>
+        <div class="home-content">
+            <h2>Chetan Kumar</h2>
+            <p class="title">DevOps Engineer</p>
+            <p>DevOps Engineer with hands-on experience building and operating Kubernetes-based platforms in cloud environments. Strong background in centralized logging, monitoring, and CI/CD automation, including ELK Stack deployments in GovCloud environments aligned with FedRAMP requirements. Comfortable working across infrastructure, security, and operations teams to deliver stable, cost-efficient, and compliant systems.</p>
+            
+            <div class="social-buttons">
+                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="social-btn linkedin-btn">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/chetan0172" target="_blank" class="social-btn github-btn">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
         </div>
     </section>
 
-    <section id="cv" class="cv-section">
-        <div class="container">
-            
-            <div class="resume-header">
-                <h2>Resume</h2>
-                <p class="contact-text">
-                    <i class="fas fa-phone-alt"></i> +91 9988230172 &nbsp;|&nbsp; 
-                    <i class="fas fa-envelope"></i> chetan.kumar90@outlook.com
-                </p>
-                
-                <div class="social-buttons">
-                    <a href="https://www.linkedin.com/" target="_blank" class="social-btn linkedin">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/" target="_blank" class="social-btn github">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
+    <!-- Resume Section -->
+    <section id="resume">
+        <div class="resume-header">
+            <h2>CHETAN KUMAR</h2>
+            <p class="resume-title">DevOps Engineer</p>
+            <p class="resume-contact">+91 9988230172 | chetan.kumar90@outlook.com</p>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>PROFESSIONAL SUMMARY</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
+                    <p>DevOps Engineer with hands-on experience building and operating Kubernetes-based platforms in cloud environments. Strong background in centralized logging, monitoring, and CI/CD automation, including ELK Stack deployments in GovCloud environments aligned with FedRAMP requirements. Comfortable working across infrastructure, security, and operations teams to deliver stable, cost-efficient, and compliant systems.</p>
                 </div>
             </div>
-            
-            <button class="accordion first-accordion">Professional Summary</button>
-            <div class="panel">
-                <p>DevOps Engineer with hands-on experience building and operating Kubernetes-based platforms in cloud environments. Strong background in centralized logging, monitoring, and CI/CD automation, including ELK Stack deployments in GovCloud environments aligned with FedRAMP requirements. Comfortable working across infrastructure, security, and operations teams to deliver stable, cost-efficient, and compliant systems.</p>
-            </div>
+        </div>
 
-            <button class="accordion">Work Experience</button>
-            <div class="panel">
-                
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Lead Consultant</h3>
-                        <span class="company">DataCouch, Mohali</span>
-                        <span class="date">Aug 2025 – Oct 2025</span>
+        <!-- Work Experience -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>WORK EXPERIENCE</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
+                    <!-- Experience 1 -->
+                    <div class="experience-item">
+                        <div class="experience-header" onclick="toggleExperience(this)">
+                            <div class="experience-title">Lead Consultant</div>
+                            <div class="experience-company">DataCouch, Mohali</div>
+                            <div class="experience-date">Aug 2025 – Present</div>
+                        </div>
+                        <div class="experience-details">
+                            <ul>
+                                <li>Deployed and managed Starburst Enterprise on Kubernetes to support distributed SQL queries across large datasets</li>
+                                <li>Optimized AWS infrastructure usage through resource right-sizing and cost controls, resulting in ~20% reduction in monthly cloud cost</li>
+                                <li>Built a centralized internal knowledge repository structured by HR, Finance, IT, and Operations, improving document accessibility and reducing information lookup time by ~40%</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Deployed and managed Starburst Enterprise on Kubernetes to support distributed SQL queries across large datasets.</li>
-                        <li>Optimized AWS infrastructure usage through resource right-sizing and cost controls, resulting in ~20% reduction in monthly cloud cost.</li>
-                        <li>Built a centralized internal knowledge repository structured by HR, Finance, IT, and Operations, improving document accessibility and reducing information lookup time by ~40%.</li>
-                    </ul>
-                </div>
 
-                <div class="job">
-                    <div class="job-header">
-                        <h3>DevOps Engineer</h3>
-                        <span class="company">RChilli Inc, Mohali</span>
-                        <span class="date">Nov 2024 – Jan 2025</span>
+                    <!-- Experience 2 -->
+                    <div class="experience-item">
+                        <div class="experience-header" onclick="toggleExperience(this)">
+                            <div class="experience-title">DevOps Engineer</div>
+                            <div class="experience-company">RChilli Inc, Mohali</div>
+                            <div class="experience-date">Nov 2024 – Jan 2025</div>
+                        </div>
+                        <div class="experience-details">
+                            <ul>
+                                <li>Implemented a centralized ELK Stack on Kubernetes (GovCloud) to aggregate logs and enable real-time monitoring across multiple clusters</li>
+                                <li>Tuned alerting rules to reduce false positives, improving incident response time (MTTR) by ~30% while maintaining 99.9% service uptime</li>
+                                <li>Integrated automated vulnerability scanning into the CI/CD pipeline to block unverified Docker images from reaching production deployments</li>
+                                <li>Configured logging and monitoring systems to align with FedRAMP security controls, supporting audit readiness and compliance reviews with no critical findings</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Implemented a centralized ELK Stack on Kubernetes (GovCloud) to aggregate logs and enable real-time monitoring across multiple clusters.</li>
-                        <li>Tuned alerting rules to reduce false positives, improving incident response time (MTTR) by ~30% while maintaining 99.9% service uptime.</li>
-                        <li>Integrated automated vulnerability scanning into the CI/CD pipeline to block unverified Docker images from reaching production deployments.</li>
-                        <li>Configured logging and monitoring systems to align with FedRAMP security controls, supporting audit readiness and compliance reviews with no critical findings.</li>
-                    </ul>
-                </div>
 
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Operation Support Engineer</h3>
-                        <span class="company">Dusane Infotech Private Limited, Navi Mumbai</span>
-                        <span class="date">March 2022 – June 2022</span>
+                    <!-- Experience 3 -->
+                    <div class="experience-item">
+                        <div class="experience-header" onclick="toggleExperience(this)">
+                            <div class="experience-title">Operation Support Engineer</div>
+                            <div class="experience-company">Dusane Infotech Private Limited, Navi Mumbai</div>
+                            <div class="experience-date">March 2022 – June 2022</div>
+                        </div>
+                        <div class="experience-details">
+                            <ul>
+                                <li>Supported IIS web servers and enterprise web applications, ensuring availability and timely issue resolution</li>
+                                <li>Managed Azure infrastructure, including virtual machines, networking, security rules, and user access management</li>
+                                <li>Provided operational support for BookMyShow IMPACT platform and UFO ticketing system</li>
+                                <li>Handled incident management, root cause analysis (RCA), and troubleshooting to reduce downtime</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Supported IIS web servers and enterprise web applications, ensuring availability and timely issue resolution.</li>
-                        <li>Managed Azure infrastructure, including virtual machines, networking, security rules, and user access management.</li>
-                        <li>Provided operational support for BookMyShow IMPACT platform and UFO ticketing system, coordinating application components across environments.</li>
-                        <li>Worked closely with development, QA, and databases teams to support project delivery and client requirements.</li>
-                        <li>Handled incident management, root cause analysis (RCA), and troubleshooting to reduce downtime and recurring issues.</li>
-                        <li>Monitored systems and network health using PRTG, performing proactive checks and preventive maintenance.</li>
-                    </ul>
-                </div>
 
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Sr Ecommerce Executive</h3>
-                        <span class="company">Nexsellers, Mumbai</span>
-                        <span class="date">Jan 2015 – Jan 2022</span>
+                    <!-- Experience 4 -->
+                    <div class="experience-item">
+                        <div class="experience-header" onclick="toggleExperience(this)">
+                            <div class="experience-title">Sr Ecommerce Executive</div>
+                            <div class="experience-company">Nexsellers, Mumbai</div>
+                            <div class="experience-date">Jan 2015 – Jan 2022</div>
+                        </div>
+                        <div class="experience-details">
+                            <ul>
+                                <li>Administered Linux and Windows Server environments supporting high-traffic eCommerce applications</li>
+                                <li>Performed patching, backup, upgrades, and security updates across servers and applications</li>
+                                <li>Provided L2/L3 production support, resolving incidents and service requests within defined SLAs</li>
+                                <li>Supported integration between eCommerce platforms, ERP, CRM, and automation systems</li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li>Administered Linux and Windows Server environments supporting high-traffic eCommerce applications.</li>
-                        <li>Performed patching, backup, upgrades, and security updates across servers and applications.</li>
-                        <li>Provided L2/L3 production support, resolving incidents and service requests within defined SLAs.</li>
-                        <li>Supported integration between eCommerce platforms, ERP, CRM, and automation systems to improve operational workflows.</li>
-                        <li>Observed system performance and platform stability, assisting with capacity planning and performance optimization.</li>
-                    </ul>
-                </div>
 
-                <div class="job">
-                    <div class="job-header">
-                        <h3>System Administration</h3>
-                        <span class="company">IGate, Noida</span>
-                        <span class="date">Feb 2014 – Nov 2014</span>
+                    <!-- Experience 5 -->
+                    <div class="experience-item">
+                        <div class="experience-header" onclick="toggleExperience(this)">
+                            <div class="experience-title">System Administration</div>
+                            <div class="experience-company">IGate, Noida</div>
+                            <div class="experience-date">Feb 2014 – Nov 2014</div>
+                        </div>
+                        <div class="experience-details">
+                            <ul>
+                                <li>Administered Active Directory (AD) services for 100+ users, streamlining Group Policy Objects (GPOs)</li>
+                                <li>Troubleshot Linux server issues related to CPU, memory, disk, and service failures</li>
+                                <li>Maintained IT infrastructure components, supporting servers, network, and end-user systems</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>PROJECTS</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
+                    <p><strong>Microservices Deployment Using CI/CD and Elastic Kubernetes Services (EKS)</strong></p>
+                    <p>Orchestrated end-to-end deployment of microservices on AWS EKS using Docker and Kubernetes. Established GitOps-based deployments with Argo CD, reducing release time from hours to under 15 minutes. Built CI/CD pipelines cutting manual effort by ~60%. Integrated Prometheus and Grafana for real-time monitoring.</p>
+                    
+                    <p><strong>FedRAMP-Compliant Application Logging & Monitoring on Kubernetes</strong></p>
+                    <p>Designed and set up centralized logging platform on GovCloud using ELK Stack and Kubernetes. Integrated application, system, and Kubernetes audit logs. Validated configurations against FedRAMP requirements supporting security reviews and audits.</p>
+                    
+                    <p><strong>Enterprise Ticketing Platform (BookMyShow IMPACT & UFO)</strong></p>
+                    <p>Maintained high-traffic IIS-based ticketing applications managing Azure infrastructure. Handled day-to-day operations and production incidents. Performed root cause analysis reducing recurring issues.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>EDUCATION</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
+                    <p><strong>B. Tech in Electronics Communication Engineering</strong></p>
+                    <p>Chandigarh Engineering College, Mohali, India</p>
+                    <p>2009 - 2013 | Percentage: 70.10%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>CERTIFICATIONS</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
                     <ul>
-                        <li>Administered Active Directory (AD) services for 100+ users, streamlining Group Policy Objects (GPOs) and user provisioning to reduce onboarding time by ~20%.</li>
-                        <li>Troubleshot Linux server issues related to CPU, memory, disk, and service failures using system logs and monitoring tools to restore application availability.</li>
-                        <li>Maintained IT infrastructure components, supporting servers, network, and end-user systems.</li>
+                        <li>Oracle Cloud Infrastructure 2025 Certified Foundations Associate</li>
+                        <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</li>
+                        <li>Modernize Infrastructure and Applications with Google Cloud</li>
+                        <li>Master's Program in DevOps Engineer | Simplilearn (Oct 2022 – Oct 2023)</li>
                     </ul>
                 </div>
             </div>
+        </div>
 
-            <button class="accordion">Projects</button>
-            <div class="panel">
-                
-                <div class="project">
-                    <h3>Microservices Deployment Using CI/CD and Elastic Kubernetes Services (EKS)</h3>
-                    <ul>
-                        <li>Orchestrated the end-to-end deployment of microservices on AWS EKS using Docker and Kubernetes.</li>
-                        <li>Established GitOps-based deployments with Argo CD, reducing release time from hours to under 15 minutes.</li>
-                        <li>Built CI/CD pipelines to automate build and deployment workflows, cutting manual effort by ~60%.</li>
-                        <li>Integrated Prometheus and Grafana to monitor application and cluster health, tracking CPU, memory, and pod availability in real time.</li>
-                        <li>Improved system stability and incident response by enabling proactive monitoring and alerts across services.</li>
-                    </ul>
-                </div>
-
-                <div class="project">
-                    <h3>FedRamp-Compliant Application Logging & Monitoring on Kubernetes</h3>
-                    <ul>
-                        <li>Designed and set up a centralized logging platform on GovCloud using ELK Stack and Kubernetes, starting from cluster sizing, storage planning, and index lifecycle policies.</li>
-                        <li>Integrated application, system, and Kubernetes audit logs into a single Elasticsearch cluster to support troubleshooting and security investigations.</li>
-                        <li>Refined log parsing and index optimization to improve search performance and reduce storage overhead.</li>
-                        <li>Validated logging and access configurations against FedRAMP requirements and documented controls to support security reviews and audits.</li>
-                    </ul>
-                </div>
-
-                <div class="project">
-                    <h3>Enterprise Ticketing Platform (BookMyShow IMPACT & UFO)</h3>
-                    <ul>
-                        <li>Assisted and maintained high-traffic IIS-based ticketing applications by managing Azure infrastructure, including virtual machines, networking, security rules, and user access.</li>
-                        <li>Handled day-to-day operations and production incidents, performed root cause analysis to reduce recurring issues.</li>
-                        <li>Worked closely with development, QA, and database teams to support releases and ensure smooth integration across platform components.</li>
-                        <li>Proactively checked server and network health using PRTG to identify and resolve issues before they impacted users.</li>
-                    </ul>
+        <!-- Skills -->
+        <div class="resume-section">
+            <div class="resume-section-header" onclick="toggleResumeSection(this)">
+                <h3>TECHNICAL SKILLS</h3>
+                <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="resume-content">
+                <div class="resume-body">
+                    <div class="skills-grid">
+                        </div>
+                        <div class="skill-item">
+                            <strong>Containerization & Orchestration</strong>
+                            <p>Kubernetes, Docker, docker Compose, Helm</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Operating Systems</strong>
+                            <p>Linux (Ubuntu, CentOS), Windows </p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>CI/CD & DevOps Tools</strong>
+                            <p>Jenkins, GitHub Actions, Argo CD</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong> Cloud Platforms</strong>
+                            <p>Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform, Oracle Cloud Infrastructure</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Cloud Skills</strong>
+                            <p>AWS EC2, S3, IAM, Lambda, VPC, EBS, RDS, DynamoDB, ECS, API Gateway, SNS, SQS</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Version Control System</strong>
+                            <p>Git, GitHub</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Monitoring and Logging</strong>
+                            <p>Prometheus, Grafana, ELK Stack, AWS CloudWatch</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Scripting & Programming</strong>
+                            <p>Python, Bash, Groovy</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Networking and Security</strong>
+                            <p>IAM Roles, Policies, Security Groups, Subnetting, Elastic IPs, Load Balancer</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Infrastructure as Code & Configuration Management</strong>
+                            <p>Terraform, AWS CloudFormation, Ansible</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Databases</strong>
+                            <p>MySQL, MongoDB</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Networking and Security</strong>
+                            <p>IAM Roles, Policies, Security Groups, Subnetting, Elastic IPs, Load Balancer</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Infrastructure as Code & Configuration</strong>
+                            <p>Terraform, AWS CloudFormation, Ansible</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Databases</strong>
+                            <p>MySQL, MongoDB</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>ITSM & Ticketing Tools</strong>
+                            <p>Jira</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>AI & Machine Learning</strong>
+                            <p>Agentic AI, LangChain</p>
+                        </div>
+                        <div class="skill-item">
+                            <strong>Compliance & Security</strong>
+                            <p>FedRAMP, Security Best Practices, Cost Optimization</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <button class="accordion">Skills Summary</button>
-            <div class="panel">
-                <ul class="skills-list">
-                    <li><strong>Containerization & Orchestration:</strong> Kubernetes, Docker, Docker Compose, Helm</li>
-                    <li><strong>Operating Systems:</strong> Linux (Ubuntu, CentOS), Windows</li>
-                    <li><strong>CI/CD & DevOps Tools:</strong> Jenkins, GitHub Actions, Argo CD</li>
-                    <li><strong>Cloud Platforms:</strong> Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform, Oracle Cloud Infrastructure</li>
-                    <li><strong>Cloud Skills (AWS):</strong> EC2, S3, IAM, Lambda, VPC, EBS, RDS, DynamoDB, ECS, API Gateway, SNS, SQS</li>
-                    <li><strong>Version Control:</strong> Git, GitHub</li>
-                    <li><strong>Monitoring & Logging:</strong> Prometheus, Grafana, ELK Stack, AWS CloudWatch</li>
-                    <li><strong>Scripting & Programming:</strong> Python, Bash, Groovy</li>
-                    <li><strong>Networking & Security:</strong> IAM Roles, Policies, Security Groups, Subnetting, Elastic IPs, Load Balancer</li>
-                    <li><strong>IaC & Config Management:</strong> Terraform, AWS CloudFormation, Ansible</li>
-                    <li><strong>Databases:</strong> MySQL, MongoDB</li>
-                    <li><strong>ITSM & Ticketing:</strong> Jira</li>
-                    <li><strong>AI & Machine Learning:</strong> Agentic AI, LangChain</li>
-                    <li><strong>Compliance:</strong> FedRAMP, Security Best Practices, Cost Optimization</li>
-                </ul>
-            </div>
-
-            <button class="accordion">Education</button>
-            <div class="panel">
-                <div class="education-item">
-                    <h3>B. Tech in Electronics Communication Engineering</h3>
-                    <p class="company">Chandigarh Engineering College, Mohali, India (2009-2013)</p>
-                    <p>Percentage: 70.10%</p>
-                </div>
-            </div>
-
-            <button class="accordion">Certifications</button>
-            <div class="panel">
-                <ul class="cert-list">
-                    <li>Oracle Cloud Infrastructure 2025 Certified Foundations Associate</li>
-                    <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</li>
-                    <li>Modernize Infrastructure and Applications with Google Cloud</li>
-                    <li>Master’s Program in DevOps Engineer | Simplilearn (12-month Intensive Bootcamp | Oct 2022 – Oct 2023)</li>
-                </ul>
-            </div>
-
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Chetan Kumar. All Rights Reserved.</p>
+        <p>&copy; 2024 Chetan Kumar. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+
+        // Smooth scrolling (only for internal links)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Toggle resume sections
+        function toggleResumeSection(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Toggle experience items
+        function toggleExperience(header) {
+            const details = header.nextElementSibling;
+            const item = header.parentElement;
+            
+            // Close all other experience items in the same section
+            const allItems = item.parentElement.querySelectorAll('.experience-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.querySelector('.experience-details').classList.remove('active');
+                }
+            });
+            
+            details.classList.toggle('active');
+        }
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]'); // Only select internal links
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.style.opacity = '';
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.style.opacity = '0.7';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

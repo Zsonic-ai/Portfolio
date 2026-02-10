@@ -1,14 +1,15 @@
 # Use the lightweight Nginx Alpine image
 FROM nginx:alpine
 
-# Remove the default Nginx static assets
+# Remove default Nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy your static files (index.html, style.css, script.js) to the Nginx html directory
+# Copy your static website files to the Nginx html directory
+# This copies index.html and your profile.png if it's in the same folder
 COPY . /usr/share/nginx/html
 
-# Expose port 80 to allow external access
+# Expose port 80
 EXPOSE 80
 
-# Start Nginx in the foreground so the container keeps running
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
